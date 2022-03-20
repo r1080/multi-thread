@@ -4,7 +4,8 @@ public class PCRunner {
 
 	public static void main(String[] args) {
 		
-		ProducerConsumerBlockingQueue processor = new ProducerConsumerBlockingQueue(5);
+		//ProducerConsumer processor = new ProducerConsumerBlockingQueue(7);
+		ProducerConsumer processor = new ProducerConsumerWaitNotify(7);
 		
 		Thread producer = new Thread(() -> {
 			try {
@@ -22,7 +23,6 @@ public class PCRunner {
 			}
 		});
 		
-
 		producer.start();
 		consumer.start();
 	}

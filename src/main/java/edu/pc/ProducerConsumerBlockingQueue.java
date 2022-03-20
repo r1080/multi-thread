@@ -4,9 +4,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-public class ProducerConsumerBlockingQueue {
+public class ProducerConsumerBlockingQueue extends ProducerConsumer {
 	
-	int capacity = 0;
 	BlockingQueue<Integer> queue = null;
 	
 	ProducerConsumerBlockingQueue(int capacity){
@@ -14,6 +13,7 @@ public class ProducerConsumerBlockingQueue {
 		queue = new ArrayBlockingQueue<>(capacity);
 	}
 	
+	@Override
 	public void producer() throws InterruptedException {
 		int counter = 0;
 		while(counter < 10) {
@@ -26,13 +26,15 @@ public class ProducerConsumerBlockingQueue {
 		}
 	}
 	
+	@Override
 	public void consumer() throws InterruptedException {
 		int counter = 0;
 		while(counter < 10) {
 			if(queue.size() == capacity)
     		System.out.println("Remove from Queue: " + queue.take());
+			counter++;
     		System.out.println("Size Of Queue Consumer: " + queue.size());
-			TimeUnit.MILLISECONDS.sleep(500);
+			TimeUnit.MILLISECONDS.sleep(1900);
 		}
 	}
 	
